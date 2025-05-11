@@ -30,12 +30,15 @@ public class Teacher {
 		qualification=s.nextLine();
 		System.out.println("Enter Teacher experience");
 		experience=s.nextInt();
-		String query="Insert into teacher values(?,?,?,?)";
+		System.out.println("Enter Teacher Subject id");
+		subject_id=s.nextInt();
+		String query="Insert into teacher values(?,?,?,?,?)";
 		PreparedStatement p=con.prepareStatement(query);
 		p.setInt(1, id);
 		p.setString(2, name);
 		p.setString(3, qualification);
 		p.setInt(4, experience);
+		p.setInt(5, subject_id);
 		p.executeUpdate();
 		System.out.println("Successfully Added Teacher");
 	}
@@ -45,13 +48,13 @@ public class Teacher {
 		PreparedStatement p=con.prepareStatement(query);
 		ResultSet r=p.executeQuery();
 		while(r.next()) {
-			System.out.println(r.getInt(1)+" "+r.getString(2)+" "+r.getString(3)+" "+r.getString(4));
+			System.out.println(r.getInt(1)+" "+r.getString(2)+" "+r.getString(3)+" "+r.getString(4)+" "+r.getInt(5));
 		}
 		
 	}
 	
 	public void updateTeacher() throws SQLException {
-		String query="Update teacher set name=?, qualification=?,experience=? where id=?";
+		String query="Update teacher set name=?, qualification=?,experience=?,subject_id=? where id=?";
 		PreparedStatement p=con.prepareStatement(query);
 		System.out.println("Enter Teacher id");
 		id=s.nextInt();
@@ -62,10 +65,14 @@ public class Teacher {
 		qualification=s.nextLine();
 		System.out.println("Enter Teacher experience");
 		experience=s.nextInt();
+		System.out.println("Enter Teacher Subject id");
+		subject_id=s.nextInt();
 		p.setString(1, name);
 		p.setString(2, qualification);
 		p.setInt(3, experience);
-		p.setInt(4, id);
+		p.setInt(4, subject_id);
+		p.setInt(5, id);
+		
 		p.executeUpdate();
 		System.out.println("Successfully Updated Teacher");
 	}
